@@ -3,9 +3,9 @@ const pageScraper = require("./pageScraper");
 const storageLiaison = require("./storageLiaison");
 
 async function main() {
-  const gameInfo = await pageScraper.getGameInfo();
+  const scrapedInfo = await pageScraper.getGameInfo();
 
-  console.log("gameInfo", gameInfo);
+  console.log("scrapedInfo", scrapedInfo);
 
   const latestInfo = await storageLiaison.readData();
 
@@ -13,13 +13,14 @@ async function main() {
 
   const isThereANewFreeGame = reminderProcessor.isThereANewFreeGame(
     latestInfo,
-    gameInfo
+    scrapedInfo
   );
   if (isThereANewFreeGame) {
+    // TODO: Need a lot of heuristics to make sure bad emails don't go out
     console.log("NEW");
   }
 
-  await storageLiaison.writeData(gameInfo);
+  await storageLiaison.writeData(scrapedInfo);
 }
 
 main();

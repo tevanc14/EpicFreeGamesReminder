@@ -1,5 +1,5 @@
 function isThereANewFreeGame(oldInfo, newInfo) {
-  return JSON.stringify(oldInfo) === JSON.stringify(newInfo);
+  return JSON.stringify(oldInfo) !== JSON.stringify(newInfo);
 }
 
 module.exports = {

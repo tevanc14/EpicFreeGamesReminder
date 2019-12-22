@@ -28,7 +28,12 @@ async function writeData(data) {
 
 async function readData() {
   const file = storage.bucket(bucketName).file(fileName);
-  return await JSON.parse(file.download());
+  if ((await file.exists())[0]) {
+    const resultBytes = await file.download();
+    return JSON.parse(resultBytes.toString());
+  } else {
+    return {}
+  }
 }
 
 function buildArchiveFileName() {
