@@ -16,12 +16,15 @@ function createCampaign(scrapedInfo) {
         console.log("NO TOKEN!?!?!!?");
       }
 
+      const html = buildEmailHtml(scrapedInfo);
+      fs.writeFileSync("gen.html", html);
+
       sendpulse.createCampaign(
         callback,
         "Sleek Software",
         "tevan@sleek.software",
         "New Free Game From Epic Games",
-        buildEmailHtml(scrapedInfo),
+        html,
         secrets.sendpulse.addressBookId
       );
     }
@@ -29,26 +32,30 @@ function createCampaign(scrapedInfo) {
 }
 
 function callback(data) {
-  console.log("Started campaign:", data);
+  console.log("Finished trying to start the campaign:", data);
 }
 
 function buildEmailHtml(scrapedInfo) {
-  const html = fs.readFileSync("./template.html", "UTF8");
+  const html = fs.readFileSync("./src/template.html", "UTF8");
   const $ = cheerio.load(html);
   for (const gameInfo of scrapedInfo) {
     const formattedStartDate = formatDate(gameInfo.date.startDate);
     const formattedEndDate = formatDate(gameInfo.date.endDate);
 
+    // This has to be updated with the inline styles when changing the html template
     const row = `
-    <tr class="game-row" 
-        onclick="window.open('${gameInfo.link}', '_blank');">
-      <th>
+    <tr class="table-row" 
+        onclick="window.open('${gameInfo.link}', '_blank');"
+        style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; cursor: pointer;">
+      <th class="table-cell">
           ${gameInfo.title}
       </th>
-      <th>
+      <th class="table-cell"
+          style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding: 30px;">
           ${chooseStartDateText(formattedStartDate, formattedEndDate, gameInfo)}
       </th>
-      <th>
+      <th class="table-cell"
+          style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding: 30px;">
           <time datetime="${gameInfo.date.endDate}">${formattedEndDate}</time>
       </th>
     </tr>
@@ -69,7 +76,6 @@ function formatDate(date) {
 }
 
 function chooseStartDateText(formattedStartDate, formattedEndDate, gameInfo) {
-  console.log(formattedStartDate, formattedEndDate);
   if (formattedStartDate === formattedEndDate) {
     return "<p>Now</p>";
   } else {

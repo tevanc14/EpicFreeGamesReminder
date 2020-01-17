@@ -13,13 +13,13 @@ async function scrapePage() {
     timeout: 0
   });
   const html = await page.content();
-  const hostname = await page.evaluate(() => {
-    return window.location.hostname;
+  const urlPrefix = await page.evaluate(() => {
+    return `${window.location.protocol}//${window.location.hostname}`;
   });
   browser.close();
   return {
     html: html,
-    hostname: hostname
+    urlPrefix: urlPrefix
   };
 }
 
@@ -55,8 +55,8 @@ function getDate(gameCard, $) {
   };
 }
 
-function getLink(gameCard, $, hostname) {
-  return hostname + $(gameCard).attr("href");
+function getLink(gameCard, $, urlPrefix) {
+  return urlPrefix + $(gameCard).attr("href");
 }
 
 function getImageInfo(gameCard, $) {
@@ -80,7 +80,7 @@ function getGameInfo() {
       const cardInfo = {
         title: getTitle(gameCard, $),
         date: getDate(gameCard, $),
-        link: getLink(gameCard, $, pageInfo.hostname),
+        link: getLink(gameCard, $, pageInfo.urlPrefix),
         imageInfo: getImageInfo(gameCard, $)
       };
 

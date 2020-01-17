@@ -2,4 +2,7 @@
 node_modules/
 
 # Secrets
-secrets.json
+**/secrets.json
+
+# Process
+gen.html

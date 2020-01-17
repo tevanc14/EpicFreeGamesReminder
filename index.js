@@ -1,11 +1,18 @@
-const reminderProcessor = require("./reminderProcessor");
-const pageScraper = require("./pageScraper");
-const storageLiaison = require("./storageLiaison");
+const fs = require("fs");
+
+const reminderProcessor = require("./src/reminderProcessor");
+const pageScraper = require("./src/pageScraper");
+const sendpulseLiaison = require("./src/sendpulseLiaison");
+const storageLiaison = require("./src/storageLiaison");
 
 async function main() {
   const scrapedInfo = await pageScraper.getGameInfo();
 
   console.log("scrapedInfo", scrapedInfo);
+
+  if (scrapedInfo.length <= 0) {
+    throw new Error("The info scraped had no results");
+  }
 
   const latestInfo = await storageLiaison.readData();
 
@@ -16,11 +23,12 @@ async function main() {
     scrapedInfo
   );
   if (isThereANewFreeGame) {
-    // TODO: Need a lot of heuristics to make sure bad emails don't go out
     console.log("NEW");
+    await reminderProcessor.handleNewFreeGame(scrapedInfo);
   }
 
-  await storageLiaison.writeData(scrapedInfo);
+  // const html = sendpulseLiaison.buildEmailHtml(scrapedInfo);
+  // fs.writeFileSync("gen.html", html);
 }
 
 main();
@@ -33,7 +41,7 @@ function index(req, res) {
     })
     .catch(error => {
       console.log("Error:", error);
-      res.status(500).send("Unknown error ocurred");
+      res.status(500).send("An error ocurred");
     });
 }
 

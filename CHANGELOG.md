@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0] - 2020-01-02
+
+Added
+
+- Dynamic email template (without images, kinda functioning)
+- Cloud function deployment
+
 ## [0.2.0] - 2019-12-22
 
 Added
