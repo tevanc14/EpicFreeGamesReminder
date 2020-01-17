@@ -27,7 +27,7 @@ async function main() {
     await reminderProcessor.handleNewFreeGame(scrapedInfo);
   }
 
-  // const html = sendpulseLiaison.buildEmailHtml(scrapedInfo);
+  // const html = sendpulseLiaison.buildEmailHtml(latestInfo);
   // fs.writeFileSync("gen.html", html);
 }
 

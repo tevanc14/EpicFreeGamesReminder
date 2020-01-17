@@ -44,20 +44,24 @@ function buildEmailHtml(scrapedInfo) {
 
     // This has to be updated with the inline styles when changing the html template
     const row = `
-    <tr class="table-row" 
-        onclick="window.open('${gameInfo.link}', '_blank');"
-        style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; cursor: pointer;">
-      <th class="table-cell">
+    <tr>
+      <td style="border-bottom: 1px solid rgb(38, 38, 38);">
+        <p>
           ${gameInfo.title}
-      </th>
-      <th class="table-cell"
-          style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding: 30px;">
+        </p>
+      </td>
+
+      <td style="border-bottom: 1px solid rgb(38, 38, 38);">
+        <p>
           ${chooseStartDateText(formattedStartDate, formattedEndDate, gameInfo)}
-      </th>
-      <th class="table-cell"
-          style="-ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; padding: 30px;">
-          <time datetime="${gameInfo.date.endDate}">${formattedEndDate}</time>
-      </th>
+        </p>
+      </td>
+
+      <td style="border-bottom: 1px solid rgb(38, 38, 38);">
+        <p>
+          ${formattedEndDate}
+        </p>
+      </td>
     </tr>
     `;
     $("#game-table").append(row);
@@ -77,9 +81,9 @@ function formatDate(date) {
 
 function chooseStartDateText(formattedStartDate, formattedEndDate, gameInfo) {
   if (formattedStartDate === formattedEndDate) {
-    return "<p>Now</p>";
+    return "Now";
   } else {
-    return `<time datetime="${gameInfo.date.startDate}">${formattedStartDate}</time>`;
+    return formattedStartDate;
   }
 }
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.4.0] - 2020-01-16
+
+Changed
+
+- Rewrote (untested) email template
+
 ## [0.3.0] - 2020-01-02
 
 Added
