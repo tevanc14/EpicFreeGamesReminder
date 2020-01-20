@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.0] - 2020-01-17
+
+Added
+
+- Functioning deploy process
+
+Changed
+
+- Tuned email template
+
 ## [0.4.0] - 2020-01-16
 
 Changed

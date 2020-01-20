@@ -18,9 +18,6 @@
 
   <title>Epic Games Free Games Reminder</title>
 
-  <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700"
-        rel="stylesheet" />
-
   <style>
     @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
       u~div .email-container {
@@ -40,68 +37,75 @@
       }
     }
   </style>
+
+  <style>
+    @media screen and (max-width: 500px) {}
+  </style>
 </head>
 
 <body width="100%"
       style="background: #212E3B;
              margin: 0 auto;
-             padding: 0;
              height: 100%;
              width: 100%;
-             font-family: 'Work Sans';
+             font-family: 'Tahoma';
              text-align: center;">
 
-  <div style="border-radius: 15px;
+  <div style="padding: 80px 20px;">
+
+    <div style="border-radius: 15px;
                 background: #FAFBFC;
-                width: 40%;
+                width: 600px;
                 margin-left: auto;
                 margin-right: auto;
                 display: inline-block;">
 
-    <div style="padding: 40px;">
+      <div style="padding: 40px;">
 
-      <div style="font-size: 25px;
-                        color: rgba(0, 0, 0, 0.3);">
-        There has been a change to the free offerings on the Epic Games
-        store. Check them out
-        <a href="https://www.epicgames.com/store/free-games"
-           target="_blank"
-           style="color: #2f89fc;">
-          here
-        </a>
+        <div style="font-size: 25px;
+                    color: rgba(0, 0, 0, 0.3);">
+          There has been a change to the<br>free offerings on the Epic Games<br>store. Check them out<br>
+          <a href="https://www.epicgames.com/store/free-games"
+            target="_blank"
+            style="color: #2f89fc;">
+            here
+          </a>
+        </div>
+
+        <br><br>
+
+        <table id="game-table"
+              width="500px"
+              border-collapse="collapse"
+              style="margin-left: auto;
+                      margin-right: auto;
+                      border-collapse: collapse;
+                      color:#000000;">
+
+          <tr>
+            <th width="50%"
+                style="border-bottom: 1px solid rgb(38, 38, 38);">
+              <p>
+                Title
+              </p>
+            </th>
+
+            <th style="border-bottom: 1px solid rgb(38, 38, 38);">
+              <p>
+                Start Date
+              </p>
+            </th>
+
+            <th style="border-bottom: 1px solid rgb(38, 38, 38);">
+              <p>
+                End Date
+              </p>
+            </th>
+          </tr>
+
+        </table>
+
       </div>
-
-      <br><br>
-
-      <table id="game-table"
-             width="80%"
-             border-collapse="collapse"
-             style="margin-left: auto;
-                          margin-right: auto;
-                          border-collapse: collapse;">
-
-        <tr>
-          <th width="50%"
-              style="border-bottom: 1px solid rgb(38, 38, 38);">
-            <p>
-              Title
-            </p>
-          </th>
-
-          <th style="border-bottom: 1px solid rgb(38, 38, 38);">
-            <p>
-              Start Date
-            </p>
-          </th>
-
-          <th style="border-bottom: 1px solid rgb(38, 38, 38);">
-            <p>
-              End Date
-            </p>
-          </th>
-        </tr>
-
-      </table>
 
     </div>
 

@@ -24,9 +24,20 @@ async function scrapePage() {
 }
 
 function getGameCards($) {
-  return $(".FreeGamesCollectionFeature-section_daece987").find(
-    ".Card-root_06ca652d"
-  );
+  const gameCards = $(".FreeGamesCollection-section_ad1b4259").find(".Card-root_06ca652d").toArray();
+  const freeGameCards = [];
+
+  for (const gameCard of gameCards) {
+    if (isGameCardForFreeGame(gameCard, $)) {
+      freeGameCards.push(gameCard);
+    }
+  }
+
+  return freeGameCards;
+}
+
+function isGameCardForFreeGame(gameCard, $) {
+  return $(gameCard).find(".AvailabilityStatusBar-root_8c3f0dee").length !== 0;
 }
 
 // TODO: Don't pass gameCard and $ into everything
@@ -73,7 +84,7 @@ function getImageInfo(gameCard, $) {
 function getGameInfo() {
   return scrapePage().then(pageInfo => {
     const $ = cheerio.load(pageInfo.html);
-    const gameCards = getGameCards($).toArray();
+    const gameCards = getGameCards($);
 
     let cardInfos = [];
     for (const gameCard of gameCards) {

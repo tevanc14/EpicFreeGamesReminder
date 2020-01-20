@@ -1,9 +1,9 @@
 const fs = require("fs");
 
-const reminderProcessor = require("./src/reminderProcessor");
-const pageScraper = require("./src/pageScraper");
-const sendpulseLiaison = require("./src/sendpulseLiaison");
-const storageLiaison = require("./src/storageLiaison");
+const reminderProcessor = require("./reminderProcessor");
+const pageScraper = require("./pageScraper");
+const sendpulseLiaison = require("./sendpulseLiaison");
+const storageLiaison = require("./storageLiaison");
 
 async function main() {
   const scrapedInfo = await pageScraper.getGameInfo();
@@ -23,7 +23,7 @@ async function main() {
     scrapedInfo
   );
   if (isThereANewFreeGame) {
-    console.log("NEW");
+    console.log("A new game was found, time to handle it")
     await reminderProcessor.handleNewFreeGame(scrapedInfo);
   }
 
@@ -31,18 +31,15 @@ async function main() {
   // fs.writeFileSync("gen.html", html);
 }
 
-main();
+// main();
 
 function index(req, res) {
-  pageScraper
-    .getGameInfo()
-    .then(gameInfo => {
-      res.status(200).send(gameInfo);
-    })
-    .catch(error => {
-      console.log("Error:", error);
-      res.status(500).send("An error ocurred");
-    });
+  main().then(() => {
+    res.status(200).send("All good")
+  }).catch(error => {
+    console.log("Error:", error);
+    res.status(500).send("An error ocurred");
+  })
 }
 
 module.exports = {
