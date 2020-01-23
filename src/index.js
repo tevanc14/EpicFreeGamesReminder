@@ -25,9 +25,9 @@ async function main() {
   if (isThereANewFreeGame) {
     console.log("A new game was found, time to handle it")
     await reminderProcessor.handleNewFreeGame(scrapedInfo);
+  } else {
+    console.log("There were no new games found.");
   }
-
-  console.log("There were no new games found.");
 
   // const html = sendpulseLiaison.buildEmailHtml(latestInfo);
   // fs.writeFileSync("gen.html", html);

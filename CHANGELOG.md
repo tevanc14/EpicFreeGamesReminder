@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.1.1] - 2020-01-23
+
+Changed
+
+- Only log when no new game is found and not during each execution
+
 ## [1.1.0] - 2020-01-23
 
 Added
