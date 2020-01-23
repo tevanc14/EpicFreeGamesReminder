@@ -3,17 +3,39 @@ const storageLiaison = require("./storageLiaison");
 
 // TODO: Should have more heuristics to make sure bad emails don't go out
 function isThereANewFreeGame(oldInfo, newInfo) {
-  const objectsAreSame = JSON.stringify(oldInfo) !== JSON.stringify(newInfo);
+  const titlesAreTheSame = areTitlesTheSame(oldInfo, newInfo);
   const oldInfoExists = oldInfo != undefined && oldInfo.length > 0;
 
-  return objectsAreSame && oldInfoExists;
+  return !titlesAreTheSame && oldInfoExists;
+}
+
+function areTitlesTheSame(oldInfo, newInfo) {
+  const oldGameTitles = getGameTitles(oldInfo);
+  const newGameTitles = getGameTitles(newInfo);
+
+  return (
+    oldGameTitles.length === newGameTitles.length &&
+    oldGameTitles.every(
+      oldGameTitle => newGameTitles.indexOf(oldGameTitle) >= 0
+    )
+  );
+}
+
+function getGameTitles(gamesInfo) {
+  const gameTitles = [];
+
+  for (const gameInfo of gamesInfo) {
+    gameTitles.push(gameInfo.title);
+  }
+
+  return gameTitles;
 }
 
 async function handleNewFreeGame(newInfo) {
-  console.log("Writing data to GCS")
-  await storageLiaison.writeData(newInfo);
   console.log("Going to start a Sendpulse campaign");
   sendpulseLiaison.createCampaign(newInfo);
+  console.log("Writing data to GCS");
+  await storageLiaison.writeData(newInfo);
 }
 
 module.exports = {

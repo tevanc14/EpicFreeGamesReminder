@@ -1,6 +1,4 @@
-const {
-  Storage
-} = require("@google-cloud/storage");
+const { Storage } = require("@google-cloud/storage");
 const fs = require("fs");
 
 const storage = new Storage();
@@ -34,7 +32,7 @@ async function readData() {
     const resultBytes = await file.download();
     return JSON.parse(resultBytes.toString());
   } else {
-    return {}
+    return {};
   }
 }
 
@@ -45,4 +43,4 @@ function buildArchiveFileName() {
 module.exports = {
   writeData: writeData,
   readData: readData
-}
+};

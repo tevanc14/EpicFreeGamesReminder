@@ -1,116 +1,115 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:v="urn:schemas-microsoft-com:vml"
-      xmlns:o="urn:schemas-microsoft-com:office:office">
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
+  <head>
+    <!-- utf-8 works for most cases -->
+    <meta charset="utf-8" />
+    <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta name="viewport" content="width=device-width" />
+    <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <meta name="x-apple-disable-message-reformatting" />
 
-<head>
-  <!-- utf-8 works for most cases -->
-  <meta charset="utf-8" />
-  <!-- Forcing initial-scale shouldn't be necessary -->
-  <meta name="viewport"
-        content="width=device-width" />
-  <!-- Use the latest (edge) version of IE rendering engine -->
-  <meta http-equiv="X-UA-Compatible"
-        content="IE=edge" />
-  <!-- Disable auto-scale in iOS 10 Mail entirely -->
-  <meta name="x-apple-disable-message-reformatting" />
+    <title>Epic Games Free Games Reminder</title>
 
-  <title>Epic Games Free Games Reminder</title>
-
-  <style>
-    @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
-      u~div .email-container {
-        min-width: 320px !important;
+    <style>
+      @media only screen and (min-device-width: 320px) and (max-device-width: 374px) {
+        u ~ div .email-container {
+          min-width: 320px !important;
+        }
       }
-    }
 
-    @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
-      u~div .email-container {
-        min-width: 375px !important;
+      @media only screen and (min-device-width: 375px) and (max-device-width: 413px) {
+        u ~ div .email-container {
+          min-width: 375px !important;
+        }
       }
-    }
 
-    @media only screen and (min-device-width: 414px) {
-      u~div .email-container {
-        min-width: 414px !important;
+      @media only screen and (min-device-width: 414px) {
+        u ~ div .email-container {
+          min-width: 414px !important;
+        }
       }
-    }
-  </style>
+    </style>
 
-  <style>
-    @media screen and (max-width: 500px) {}
-  </style>
-</head>
+    <style>
+      @media screen and (max-width: 500px) {
+      }
+    </style>
+  </head>
 
-<body width="100%"
-      style="background: #212E3B;
-             margin: 0 auto;
-             height: 100%;
-             width: 100%;
-             font-family: 'Tahoma';
-             text-align: center;">
+  <body
+    width="100%"
+    style="background: #212E3B;
+           margin: 0 auto;
+           height: 100%;
+           width: 100%;
+           font-family: 'Tahoma';
+           text-align: center;"
+  >
+    <div style="padding: 80px 20px;">
+      <div
+        style="border-radius: 15px;
+               background: #FAFBFC;
+               width: 600px;
+               margin-left: auto;
+               margin-right: auto;
+               display: inline-block;"
+      >
+        <div style="padding: 40px;">
+          <div
+            style="font-size: 25px;
+                   color: rgba(0, 0, 0, 0.3);"
+          >
+            There has been a change to<br />the free offerings on the<br />Epic
+            Games store.<br />Check them out<br />
+            <a
+              href="https://www.epicgames.com/store/free-games"
+              target="_blank"
+              style="color: #2f89fc;"
+            >
+              here
+            </a>
+          </div>
 
-  <div style="padding: 80px 20px;">
+          <br /><br />
 
-    <div style="border-radius: 15px;
-                background: #FAFBFC;
-                width: 600px;
-                margin-left: auto;
-                margin-right: auto;
-                display: inline-block;">
+          <table
+            id="game-table"
+            width="500px"
+            border-collapse="collapse"
+            style="margin-left: auto;
+                   margin-right: auto;
+                   border-collapse: collapse;
+                   color:#000000;"
+          >
+            <tr>
+              <th width="50%" style="border-bottom: 1px solid rgb(38, 38, 38);">
+                <p>
+                  Title
+                </p>
+              </th>
 
-      <div style="padding: 40px;">
+              <th style="border-bottom: 1px solid rgb(38, 38, 38);">
+                <p>
+                  Start Date
+                </p>
+              </th>
 
-        <div style="font-size: 25px;
-                    color: rgba(0, 0, 0, 0.3);">
-          There has been a change to the<br>free offerings on the Epic Games<br>store. Check them out<br>
-          <a href="https://www.epicgames.com/store/free-games"
-            target="_blank"
-            style="color: #2f89fc;">
-            here
-          </a>
+              <th style="border-bottom: 1px solid rgb(38, 38, 38);">
+                <p>
+                  End Date
+                </p>
+              </th>
+            </tr>
+          </table>
         </div>
-
-        <br><br>
-
-        <table id="game-table"
-              width="500px"
-              border-collapse="collapse"
-              style="margin-left: auto;
-                      margin-right: auto;
-                      border-collapse: collapse;
-                      color:#000000;">
-
-          <tr>
-            <th width="50%"
-                style="border-bottom: 1px solid rgb(38, 38, 38);">
-              <p>
-                Title
-              </p>
-            </th>
-
-            <th style="border-bottom: 1px solid rgb(38, 38, 38);">
-              <p>
-                Start Date
-              </p>
-            </th>
-
-            <th style="border-bottom: 1px solid rgb(38, 38, 38);">
-              <p>
-                End Date
-              </p>
-            </th>
-          </tr>
-
-        </table>
-
       </div>
-
     </div>
-
-  </div>
-
-</body>
-
+  </body>
 </html>

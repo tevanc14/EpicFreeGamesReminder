@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.0] - 2020-01-23
+
+Changed
+
+- Alert for new games based on only game titles
+
 ## [1.1.1] - 2020-01-23
 
 Changed

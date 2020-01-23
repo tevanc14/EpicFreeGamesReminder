@@ -24,7 +24,9 @@ async function scrapePage() {
 }
 
 function getGameCards($) {
-  const gameCards = $(".FreeGamesCollection-section_ad1b4259").find(".Card-root_06ca652d").toArray();
+  const gameCards = $(".FreeGamesCollection-section_ad1b4259")
+    .find(".Card-root_06ca652d")
+    .toArray();
   const freeGameCards = [];
 
   for (const gameCard of gameCards) {
