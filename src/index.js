@@ -27,6 +27,8 @@ async function main() {
     await reminderProcessor.handleNewFreeGame(scrapedInfo);
   }
 
+  console.log("There were no new games found.");
+
   // const html = sendpulseLiaison.buildEmailHtml(latestInfo);
   // fs.writeFileSync("gen.html", html);
 }
