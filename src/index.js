@@ -33,7 +33,7 @@ async function main() {
   // fs.writeFileSync("gen.html", html);
 }
 
-main();
+// main();
 
 function index(req, res) {
   main()
