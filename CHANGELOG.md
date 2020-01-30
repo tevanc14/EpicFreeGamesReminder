@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1] - 2020-01-30
+
+Changed
+
+- Forced the Sendpulse API call to block so it will get done during function execution
+- Breaking in HTML template
+
 ## [1.3.0] - 2020-01-29
 
 Added

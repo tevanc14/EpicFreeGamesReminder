@@ -33,7 +33,7 @@ function getGameTitles(gamesInfo) {
 
 async function handleNewFreeGame(newInfo) {
   console.log("Going to start a Sendpulse campaign");
-  sendpulseLiaison.createCampaign(newInfo);
+  await sendpulseLiaison.createCampaign(newInfo);
   console.log("Writing data to GCS");
   await storageLiaison.writeData(newInfo);
 }

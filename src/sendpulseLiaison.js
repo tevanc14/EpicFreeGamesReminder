@@ -10,27 +10,31 @@ function createCampaign(scrapedInfo) {
     secrets.sendpulse.apiUserId,
     secrets.sendpulse.apiSecret,
     tokenStorage,
-    token => {
+    async (token) => {
       if (token && token.is_error) {
         console.log("NO TOKEN!?!?!!?");
       }
 
       const html = emailBuilder.buildEmailHtml(scrapedInfo);
-
-      sendpulse.createCampaign(
-        callback,
-        "Sleek Software",
-        "tevan@sleek.software",
-        "New Free Game From Epic Games",
-        html,
-        secrets.sendpulse.addressBookId
-      );
+      await sendpulsePromiseWrapper(html);
     }
   );
 }
 
-function callback(data) {
-  console.log("Finished trying to start the campaign:", data);
+function sendpulsePromiseWrapper(html) {
+  return new Promise((resolve, reject) => {
+    sendpulse.createCampaign(
+      response => {
+        console.log("Finished trying to start the campaign:", response);
+        resolve("Finished successfully");
+      },
+      "Sleek Software",
+      "tevan@sleek.software",
+      "New Free Game From Epic Games",
+      html,
+      secrets.sendpulse.addressBookId
+    );
+  });
 }
 
 module.exports = {
