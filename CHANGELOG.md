@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0] - 2020-01-29
+
+Added
+
+- Description in README
+- More `package.json` documentation fields
+
 ## [1.2.1] - 2020-01-28
 
 Removed
