@@ -1,6 +1,6 @@
 {
   "name": "epic-free-games-reminder",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Scrape the Epic Games free games page to alert a mailing list of any changes in the offerings.",
   "main": "index.js",
   "scripts": {},

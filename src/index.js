@@ -1,8 +1,8 @@
 const fs = require("fs");
 
-const reminderProcessor = require("./reminderProcessor");
+const emailBuilder = require("./emailBuilder");
 const pageScraper = require("./pageScraper");
-const sendpulseLiaison = require("./sendpulseLiaison");
+const reminderProcessor = require("./reminderProcessor");
 const storageLiaison = require("./storageLiaison");
 
 async function main() {
@@ -29,7 +29,7 @@ async function main() {
     console.log("There were no new games found.");
   }
 
-  // const html = sendpulseLiaison.buildEmailHtml(latestInfo);
+  // const html = emailBuilder.buildEmailHtml(latestInfo);
   // fs.writeFileSync("gen.html", html);
 }
 

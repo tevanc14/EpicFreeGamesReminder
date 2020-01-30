@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.4.0] - 2020-01-30
+
+Removed
+
+- Time on email to avoid giving wrong time zone in emails (plus it is a little cleaner looking)
+
 ## [1.3.1] - 2020-01-30
 
 Changed

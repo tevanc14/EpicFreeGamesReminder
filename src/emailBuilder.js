@@ -19,7 +19,7 @@ function buildEmailHtml(scrapedInfo) {
 
     <td style="border-bottom: 1px solid rgb(38, 38, 38);">
         <p>
-          ${chooseStartDateText(formattedStartDate, formattedEndDate, gameInfo)}
+          ${chooseStartDateText(formattedStartDate, formattedEndDate)}
         </p>
     </td>
 
@@ -39,13 +39,12 @@ function formatDate(date) {
   const dateObj = new Date(date);
   const formatOptions = {
     month: "short",
-    day: "numeric",
-    hour: "numeric"
+    day: "numeric"
   };
   return dateObj.toLocaleDateString("en-US", formatOptions);
 }
 
-function chooseStartDateText(formattedStartDate, formattedEndDate, gameInfo) {
+function chooseStartDateText(formattedStartDate, formattedEndDate) {
   if (formattedStartDate === formattedEndDate) {
     return "Now";
   } else {
