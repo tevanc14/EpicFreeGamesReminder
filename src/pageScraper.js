@@ -24,33 +24,27 @@ async function scrapePage() {
 }
 
 function getGameCards($) {
-  const gameCards = $(".FreeGamesCollection-section_ad1b4259")
-    .find(".Card-root_06ca652d")
+  const gameCards = $(".CardGrid-group_c5363b6a")
+    .find(".CardGrid-card_57b1694f")
     .toArray();
   const freeGameCards = [];
 
   for (const gameCard of gameCards) {
-    if (isGameCardForFreeGame(gameCard, $)) {
-      freeGameCards.push(gameCard);
-    }
+    freeGameCards.push(gameCard);
   }
 
   return freeGameCards;
 }
 
-function isGameCardForFreeGame(gameCard, $) {
-  return $(gameCard).find(".AvailabilityStatusBar-root_8c3f0dee").length !== 0;
-}
-
 // TODO: Don't pass gameCard and $ into everything
 function getTitle(gameCard, $) {
   return $(gameCard)
-    .find(".Card-title_17f29aee")
+    .find(".OfferTitleInfo-title_abc02a91")
     .text();
 }
 
 function getDate(gameCard, $) {
-  const dateDiv = $(gameCard).find(".Card-subtitle_dd288569");
+  const dateDiv = $(gameCard).find(".OfferTitleInfo-subtitle_ad134671");
   const timeDivs = $(dateDiv)
     .find("span")
     .find("time")
@@ -69,16 +63,17 @@ function getDate(gameCard, $) {
 }
 
 function getLink(gameCard, $, urlPrefix) {
-  return urlPrefix + $(gameCard).attr("href");
+  return urlPrefix + $(gameCard).find("a").attr("href");
 }
 
 function getImageInfo(gameCard, $) {
   return {
     titleImage: $(gameCard)
-      .find(".Picture-image_59c772c1")
+      .find(".Picture-picture_6dd45462")
+      .find("img")
       .attr("src"),
     logoImage: $(gameCard)
-      .find(".DynamicLogo-logo_f5443fce")
+      .find(".DynamicLogo-logo_3af88135")
       .attr("src")
   };
 }

@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.0] - 2020-02-15
+
+Changed
+
+- Identifiers for elements that were changed on the Epic site
+
 ## [1.4.0] - 2020-01-30
 
 Removed
