@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.0] - 2020-05-07
+
+Added
+
+- Don't consider "mystery games" when checking for a new game. These include timestamps so they will always seem to be new.
+
 ## [2.0.0] - 2020-02-15
 
 Changed

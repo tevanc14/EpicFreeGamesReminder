@@ -16,7 +16,7 @@ function areTitlesTheSame(oldInfo, newInfo) {
   return (
     oldGameTitles.length === newGameTitles.length &&
     oldGameTitles.every(
-      oldGameTitle => newGameTitles.indexOf(oldGameTitle) >= 0
+      (oldGameTitle) => newGameTitles.indexOf(oldGameTitle) >= 0
     )
   );
 }
@@ -25,10 +25,17 @@ function getGameTitles(gamesInfo) {
   const gameTitles = [];
 
   for (const gameInfo of gamesInfo) {
-    gameTitles.push(gameInfo.title);
+    if (!gameIsMystery(gameInfo)) {
+      gameTitles.push(gameInfo.title);
+    }
   }
 
   return gameTitles;
+}
+
+function gameIsMystery(gameInfo) {
+  const mysteryRegex = /Unlocking in \d{2}:\d{2}:\d{2}:\d{2}/g;
+  return gameInfo.title.match(mysteryRegex);
 }
 
 async function handleNewFreeGame(newInfo) {
@@ -40,5 +47,5 @@ async function handleNewFreeGame(newInfo) {
 
 module.exports = {
   handleNewFreeGame: handleNewFreeGame,
-  isThereANewFreeGame: isThereANewFreeGame
+  isThereANewFreeGame: isThereANewFreeGame,
 };
