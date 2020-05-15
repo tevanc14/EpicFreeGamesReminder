@@ -36,6 +36,10 @@ function buildEmailHtml(scrapedInfo) {
 }
 
 function formatDate(date) {
+  if (date === "?") {
+    return "?";
+  }
+
   const dateObj = new Date(date);
   const formatOptions = {
     month: "short",

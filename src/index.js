@@ -24,16 +24,19 @@ async function main() {
   );
   if (isThereANewFreeGame) {
     console.log("A new game was found, time to handle it");
-    await reminderProcessor.handleNewFreeGame(scrapedInfo);
+    if (!isTestRun()) {
+      await reminderProcessor.handleNewFreeGame(scrapedInfo);
+    }
   } else {
     console.log("There were no new games found.");
   }
-
-  // const html = emailBuilder.buildEmailHtml(latestInfo);
-  // fs.writeFileSync("gen.html", html);
 }
 
-// main();
+if (isTestRun()) {
+  main();
+  const html = emailBuilder.buildEmailHtml(scrapedInfo);
+  fs.writeFileSync("gen.html", html);
+}
 
 function index(req, res) {
   main()
@@ -44,6 +47,14 @@ function index(req, res) {
       console.log("Error:", error);
       res.status(500).send("An error ocurred");
     });
+}
+
+function isTestRun() {
+  if (process.argv.length < 3) {
+    return false;
+  } else {
+    return process.argv[2] === "dry-run";
+  }
 }
 
 module.exports = {

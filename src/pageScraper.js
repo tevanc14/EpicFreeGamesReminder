@@ -1,16 +1,18 @@
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 
+const reminderProcessor = require("./reminderProcessor");
+
 const url = "https://www.epicgames.com/store/free-games";
 
 async function scrapePage() {
   const browser = await puppeteer.launch({
-    args: ["--no-sandbox", "--disable-setuid-sandbox"]
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
   await page.goto(url, {
     waitUntil: "networkidle2",
-    timeout: 0
+    timeout: 0,
   });
   const html = await page.content();
   const urlPrefix = await page.evaluate(() => {
@@ -19,7 +21,7 @@ async function scrapePage() {
   browser.close();
   return {
     html: html,
-    urlPrefix: urlPrefix
+    urlPrefix: urlPrefix,
   };
 }
 
@@ -38,17 +40,45 @@ function getGameCards($) {
 
 // TODO: Don't pass gameCard and $ into everything
 function getTitle(gameCard, $) {
-  return $(gameCard)
-    .find(".OfferTitleInfo-title_abc02a91")
-    .text();
+  return $(gameCard).find(".OfferTitleInfo-title_abc02a91").text();
 }
 
-function getDate(gameCard, $) {
-  const dateDiv = $(gameCard).find(".OfferTitleInfo-subtitle_ad134671");
-  const timeDivs = $(dateDiv)
-    .find("span")
-    .find("time")
+function getDate(gameCard, $, title) {
+  // If the game is mystery, it displays a countdown including days, hours, minutes, and seconds
+  // So we calculate that out to get a start date, end date is not defined
+  if (reminderProcessor.gameIsMystery(title)) {
+    return getCountdownDate(gameCard, $);
+  } else {
+    return getRegularDate(gameCard, $);
+  }
+}
+
+function getCountdownDate(gameCard, $) {
+  const countdownDivs = $(gameCard)
+    .find(".OfferTitleInfo-title_abc02a91")
+    .find(".css-1ovumeb")
     .toArray();
+
+  const days = parseInt($(countdownDivs[0]).text());
+  const hours = parseInt($(countdownDivs[1]).text());
+  const minutes = parseInt($(countdownDivs[2]).text());
+  const seconds = parseInt($(countdownDivs[3]).text());
+
+  const releaseDate = new Date();
+  releaseDate.setSeconds(releaseDate.getSeconds() + seconds);
+  releaseDate.setMinutes(releaseDate.getMinutes() + minutes);
+  releaseDate.setHours(releaseDate.getHours() + hours);
+  releaseDate.setDate(releaseDate.getDate() + days);
+
+  return {
+    startDate: releaseDate,
+    endDate: "?",
+  };
+}
+
+function getRegularDate(gameCard, $) {
+  const dateDiv = $(gameCard).find(".OfferTitleInfo-subtitle_ad134671");
+  const timeDivs = $(dateDiv).find("span").find("time").toArray();
 
   let dateRange = [];
   for (const timeDiv of timeDivs) {
@@ -58,7 +88,7 @@ function getDate(gameCard, $) {
 
   return {
     startDate: dateRange[0],
-    endDate: dateRange[1]
+    endDate: dateRange[1],
   };
 }
 
@@ -72,24 +102,27 @@ function getImageInfo(gameCard, $) {
       .find(".Picture-picture_6dd45462")
       .find("img")
       .attr("src"),
-    logoImage: $(gameCard)
-      .find(".DynamicLogo-logo_3af88135")
-      .attr("src")
+    logoImage: $(gameCard).find(".DynamicLogo-logo_3af88135").attr("src"),
   };
 }
 
 function getGameInfo() {
-  return scrapePage().then(pageInfo => {
+  return scrapePage().then((pageInfo) => {
     const $ = cheerio.load(pageInfo.html);
     const gameCards = getGameCards($);
 
     let cardInfos = [];
     for (const gameCard of gameCards) {
+      const title = getTitle(gameCard, $);
+      const date = getDate(gameCard, $, title);
+      const link = getLink(gameCard, $, pageInfo.urlPrefix);
+      const imageInfo = getImageInfo(gameCard, $);
+
       const cardInfo = {
-        title: getTitle(gameCard, $),
-        date: getDate(gameCard, $),
-        link: getLink(gameCard, $, pageInfo.urlPrefix),
-        imageInfo: getImageInfo(gameCard, $)
+        title: title,
+        date: date,
+        link: link,
+        imageInfo: imageInfo,
       };
 
       cardInfos.push(cardInfo);
@@ -100,5 +133,5 @@ function getGameInfo() {
 }
 
 module.exports = {
-  getGameInfo: getGameInfo
+  getGameInfo: getGameInfo,
 };

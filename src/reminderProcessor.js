@@ -25,7 +25,7 @@ function getGameTitles(gamesInfo) {
   const gameTitles = [];
 
   for (const gameInfo of gamesInfo) {
-    if (!gameIsMystery(gameInfo)) {
+    if (!gameIsMystery(gameInfo.title)) {
       gameTitles.push(gameInfo.title);
     }
   }
@@ -33,9 +33,9 @@ function getGameTitles(gamesInfo) {
   return gameTitles;
 }
 
-function gameIsMystery(gameInfo) {
+function gameIsMystery(gameTitle) {
   const mysteryRegex = /Unlocking in \d{2}:\d{2}:\d{2}:\d{2}/g;
-  return gameInfo.title.match(mysteryRegex);
+  return gameTitle.match(mysteryRegex);
 }
 
 async function handleNewFreeGame(newInfo) {
@@ -48,4 +48,5 @@ async function handleNewFreeGame(newInfo) {
 module.exports = {
   handleNewFreeGame: handleNewFreeGame,
   isThereANewFreeGame: isThereANewFreeGame,
+  gameIsMystery: gameIsMystery,
 };

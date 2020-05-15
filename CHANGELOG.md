@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0] - 2020-05-15
+
+Added
+
+- When a "mystery game" is scraped, get the countdown and create a start date and ignore the end date
+- Dry run mode for local testing
+
 ## [2.1.0] - 2020-05-07
 
 Added
