@@ -30,12 +30,17 @@ async function main() {
   } else {
     console.log("There were no new games found.");
   }
+
+  if (isTestRun()) {
+    const html = emailBuilder.buildEmailHtml(scrapedInfo);
+    fs.writeFileSync("gen.html", html);
+  }
+
+  return scrapedInfo;
 }
 
 if (isTestRun()) {
   main();
-  const html = emailBuilder.buildEmailHtml(scrapedInfo);
-  fs.writeFileSync("gen.html", html);
 }
 
 function index(req, res) {

@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.3.0] - 2020-06-25
+
+Added
+
+- Handle the "More Free Games" section of the page
+
+Changed
+
+- Using the dry run actually works
+
 ## [2.2.0] - 2020-05-15
 
 Added

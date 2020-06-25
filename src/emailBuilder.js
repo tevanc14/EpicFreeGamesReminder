@@ -38,6 +38,8 @@ function buildEmailHtml(scrapedInfo) {
 function formatDate(date) {
   if (date === "?") {
     return "?";
+  } else if (date === undefined) {
+    return "-";
   }
 
   const dateObj = new Date(date);
