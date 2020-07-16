@@ -4,6 +4,8 @@ const puppeteer = require("puppeteer");
 const reminderProcessor = require("./reminderProcessor");
 
 const url = "https://www.epicgames.com/store/free-games";
+const titleSelector = ".OfferTitleInfo-title_ed062ba4";
+const subtitleSelector = ".OfferTitleInfo-subtitle_30c79f0d";
 
 async function scrapePage() {
   const browser = await puppeteer.launch({
@@ -40,7 +42,7 @@ function getGameCards($) {
 
 // TODO: Don't pass gameCard and $ into everything
 function getTitle(gameCard, $) {
-  return $(gameCard).find(".OfferTitleInfo-title_abc02a91").text();
+  return $(gameCard).find(titleSelector).text();
 }
 
 function getDate(gameCard, $, title) {
@@ -55,7 +57,7 @@ function getDate(gameCard, $, title) {
 
 function getCountdownDate(gameCard, $) {
   const countdownDivs = $(gameCard)
-    .find(".OfferTitleInfo-title_abc02a91")
+    .find(titleSelector)
     .find(".css-1ovumeb")
     .toArray();
 
@@ -77,7 +79,7 @@ function getCountdownDate(gameCard, $) {
 }
 
 function getRegularDate(gameCard, $) {
-  const dateDiv = $(gameCard).find(".OfferTitleInfo-subtitle_ad134671");
+  const dateDiv = $(gameCard).find(subtitleSelector);
   const timeDivs = $(dateDiv).find("span").find("time").toArray();
 
   let dateRange = [];
