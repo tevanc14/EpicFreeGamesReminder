@@ -4,8 +4,8 @@ const puppeteer = require("puppeteer");
 const reminderProcessor = require("./reminderProcessor");
 
 const url = "https://www.epicgames.com/store/free-games";
-const titleSelector = ".OfferTitleInfo-title_ed062ba4";
-const subtitleSelector = ".OfferTitleInfo-subtitle_30c79f0d";
+const titleSelector = ".OfferTitleInfo-title_abc02a91";
+const subtitleSelector = ".OfferTitleInfo-subtitle_ad134671";
 
 async function scrapePage() {
   const browser = await puppeteer.launch({

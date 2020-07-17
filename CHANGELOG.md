@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.5.0] - 2020-07-16
+
+Changed
+
+- Title and subtitle selectors back (don't know what they are doing)
+
 ## [2.4.1] - 2020-07-16
 
 Changed
