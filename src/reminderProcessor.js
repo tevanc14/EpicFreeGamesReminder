@@ -4,9 +4,10 @@ const storageLiaison = require("./storageLiaison");
 // TODO: Should have more heuristics to make sure bad emails don't go out
 function isThereANewFreeGame(oldInfo, newInfo) {
   const titlesAreTheSame = areTitlesTheSame(oldInfo, newInfo);
-  const oldInfoExists = oldInfo != undefined && oldInfo.length > 0;
+  const oldInfoExists = oldInfo !== undefined && oldInfo.length > 0;
+  const titlesExist = getGameTitles(newInfo).length > 0;
 
-  return !titlesAreTheSame && oldInfoExists;
+  return !titlesAreTheSame && oldInfoExists && titlesExist;
 }
 
 function areTitlesTheSame(oldInfo, newInfo) {

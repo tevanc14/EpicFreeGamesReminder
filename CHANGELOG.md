@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.6.0] - 2020-07-23
+
+Added
+
+- Check if there are titles returned, and don't send an email if there aren't
+
+Changed
+
+- Title and subtitle selectors
+
 ## [2.5.0] - 2020-07-16
 
 Changed
