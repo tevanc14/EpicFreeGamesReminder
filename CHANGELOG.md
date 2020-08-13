@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0] - 2020-08-13
+
+Changed
+
+- Consolidated image information to one property (major change)
+- Selectors in variables
+
 ## [2.6.0] - 2020-07-23
 
 Added

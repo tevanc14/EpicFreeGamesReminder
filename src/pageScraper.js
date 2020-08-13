@@ -4,8 +4,11 @@ const puppeteer = require("puppeteer");
 const reminderProcessor = require("./reminderProcessor");
 
 const url = "https://www.epicgames.com/store/free-games";
-const titleSelector = ".OfferTitleInfo-title_ed062ba4";
-const subtitleSelector = ".OfferTitleInfo-subtitle_30c79f0d";
+const cardCollectionSelector = ".css-1i5exm2";
+const cardSelector = ".css-11syfh5-CardGrid-styles__card";
+const titleSelector = ".css-tybchz-OfferTitleInfo__title";
+const subtitleSelector = ".css-1ilzsb0-OfferTitleInfo__subtitle";
+const imageSelector = ".css-1h7nwzt-Picture-styles__image-OfferCardImageArt__picture-OfferCardImagePortrait__picture-Picture-styles__visible";
 
 async function scrapePage() {
   const browser = await puppeteer.launch({
@@ -28,8 +31,8 @@ async function scrapePage() {
 }
 
 function getGameCards($) {
-  const gameCards = $(".CardGrid-group_c5363b6a")
-    .find(".CardGrid-card_57b1694f")
+  const gameCards = $(cardCollectionSelector)
+    .find(cardSelector)
     .toArray();
   const freeGameCards = [];
 
@@ -100,11 +103,9 @@ function getLink(gameCard, $, urlPrefix) {
 
 function getImageInfo(gameCard, $) {
   return {
-    titleImage: $(gameCard)
-      .find(".Picture-picture_6dd45462")
-      .find("img")
+    image: $(gameCard)
+      .find(imageSelector)
       .attr("src"),
-    logoImage: $(gameCard).find(".DynamicLogo-logo_3af88135").attr("src"),
   };
 }
 
