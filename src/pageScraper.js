@@ -4,7 +4,7 @@ const puppeteer = require("puppeteer");
 const reminderProcessor = require("./reminderProcessor");
 
 const url = "https://www.epicgames.com/store/free-games";
-const cardCollectionSelector = ".css-1i5exm2";
+const cardCollectionSelector = ".css-1nzrk0w-CardGrid-styles__groupWrapper";
 const cardSelector = ".css-11syfh5-CardGrid-styles__card";
 const titleSelector = ".css-tybchz-OfferTitleInfo__title";
 const subtitleSelector = ".css-1ilzsb0-OfferTitleInfo__subtitle";

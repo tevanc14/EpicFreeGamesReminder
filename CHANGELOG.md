@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.1] - 2020-08-25
+
+Changed
+
+- Selectors (going to just do bugfixes since it's not really doing anything significant and will happen often)
+
 ## [3.0.0] - 2020-08-13
 
 Changed
