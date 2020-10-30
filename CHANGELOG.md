@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.2] - 2020-10-30
+
+Added
+
+- Exclude the dumb free games that are always there
+
+Changed
+
+- Selectors
+
 ## [3.0.1] - 2020-08-25
 
 Changed

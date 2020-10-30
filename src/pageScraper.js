@@ -4,21 +4,24 @@ const puppeteer = require("puppeteer");
 const reminderProcessor = require("./reminderProcessor");
 
 const url = "https://www.epicgames.com/store/free-games";
-const cardCollectionSelector = ".css-1nzrk0w-CardGrid-styles__groupWrapper";
+const cardCollectionSelector = ".css-53yrcz-CardGridDesktopLandscape__cardWrapperDesktop";
 const cardSelector = ".css-11syfh5-CardGrid-styles__card";
-const titleSelector = ".css-tybchz-OfferTitleInfo__title";
-const subtitleSelector = ".css-1ilzsb0-OfferTitleInfo__subtitle";
-const imageSelector = ".css-1h7nwzt-Picture-styles__image-OfferCardImageArt__picture-OfferCardImagePortrait__picture-Picture-styles__visible";
+const titleSelector = ".css-2ucwu";
+const subtitleSelector = ".css-os6fbq";
+// Needs to be the selector on the img tag itself
+const imageSelector = ".css-1s4ypbt-Picture-styles__image-OfferCardImageArt__picture-OfferCardImageLandscape__picture-Picture-styles__visible";
+const freeBannerSelector = ".css-1s53uiq-FreeOfferCard__minHeightWrapper";
 
 async function scrapePage() {
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
-  await page.goto(url, {
+  const pageResponse = await page.goto(url, {
     waitUntil: "networkidle2",
     timeout: 0,
   });
+  console.log("Page response:", pageResponse.status());
   const html = await page.content();
   const urlPrefix = await page.evaluate(() => {
     return `${window.location.protocol}//${window.location.hostname}`;
@@ -37,7 +40,11 @@ function getGameCards($) {
   const freeGameCards = [];
 
   for (const gameCard of gameCards) {
-    freeGameCards.push(gameCard);
+    // Check for the "FREE NOW" or "COMING SOON" banner underneath the good free games
+    // Don't need to include Sludge Life and Thimbleweed Park for the thousandth time
+    if ($(gameCard).find(freeBannerSelector).toArray().length > 0) {
+      freeGameCards.push(gameCard);
+    }
   }
 
   return freeGameCards;
