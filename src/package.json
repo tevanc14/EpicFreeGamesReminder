@@ -7,7 +7,7 @@
     "start": "node index.js dry-run"
   },
   "dependencies": {
-    "@google-cloud/storage": "^4.1.3",
+    "@google-cloud/storage": "^5.8.5",
     "cheerio": "^1.0.0-rc.3",
     "puppeteer": "2.0.0",
     "sendpulse-api": "^1.1.2"
