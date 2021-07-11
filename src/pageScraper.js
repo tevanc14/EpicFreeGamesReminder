@@ -4,13 +4,13 @@ const puppeteer = require("puppeteer");
 const reminderProcessor = require("./reminderProcessor");
 
 const url = "https://www.epicgames.com/store/free-games";
-const cardCollectionSelector = ".css-53yrcz-CardGridDesktopLandscape__cardWrapperDesktop";
-const cardSelector = ".css-11syfh5-CardGrid-styles__card";
+const cardCollectionSelector = ".css-1nzrk0w-CardGrid-styles__groupWrapper";
+const cardSelector = ".css-7z9jo1-OfferCard__content";
 const titleSelector = ".css-2ucwu";
 const subtitleSelector = ".css-os6fbq";
 // Needs to be the selector on the img tag itself
-const imageSelector = ".css-1s4ypbt-Picture-styles__image-OfferCardImageArt__picture-OfferCardImageLandscape__picture-Picture-styles__visible";
-const freeBannerSelector = ".css-1s53uiq-FreeOfferCard__minHeightWrapper";
+const imageSelector = ".css-1rsvhjy-Picture-styles__image-OfferCardImageArt__picture-OfferCardImagePortrait__picture-Picture-styles__visible";
+const freeBannerSelector = ".css-1r3zsoc-StatusBar__root";
 
 async function scrapePage() {
   const browser = await puppeteer.launch({
