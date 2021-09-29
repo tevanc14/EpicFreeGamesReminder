@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.0.4] - 2021-09-29
+
+Changed
+
+- Selectors
+
 ## [3.0.3] - 2021-07-10
 
 Changed
