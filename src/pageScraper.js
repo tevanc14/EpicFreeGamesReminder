@@ -52,7 +52,7 @@ function getGameCards($) {
 
 // TODO: Don't pass gameCard and $ into everything
 function getTitle(gameCard, $) {
-  return $(gameCard).find(titleSelector).find('.css-0').text();
+  return $(gameCard).find(titleSelector).find("div").text();
 }
 
 function getDate(gameCard, $, title) {
