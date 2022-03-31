@@ -7,7 +7,7 @@ const url = "https://www.epicgames.com/store/free-games";
 const cardCollectionSelector = ".css-1i5exm2";
 const cardSelector = ".css-nq799m";
 const titleSelector = ".css-2ucwu";
-const subtitleSelector = ".css-os6fbq";
+const subtitleSelector = ".css-nf3v9d";
 // Needs to be the selector on the img tag itself
 const imageSelector = ".css-18gnhv2";
 const freeBannerSelector = ".css-1kggtxl";
