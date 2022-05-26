@@ -3,20 +3,21 @@ const puppeteer = require("puppeteer");
 
 const reminderProcessor = require("./reminderProcessor");
 
-const url = "https://www.epicgames.com/store/free-games";
-const cardCollectionSelector = ".css-1i5exm2";
+const url = "https://www.epicgames.com/store/en-US/free-games";
+const cardCollectionSelector = ".css-1myhtyb";
 const cardSelector = ".css-nq799m";
 const titleSelector = ".css-2ucwu";
 const subtitleSelector = ".css-nf3v9d";
 // Needs to be the selector on the img tag itself
 const imageSelector = ".css-18gnhv2";
-const freeBannerSelector = ".css-1kggtxl";
+const freeBannerSelectors = [".css-11xvn05", ".css-gyjcm9"];
 
 async function scrapePage() {
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
+  await bypassBotDetection(page);
   const pageResponse = await page.goto(url, {
     waitUntil: "networkidle2",
     timeout: 0,
@@ -34,15 +35,13 @@ async function scrapePage() {
 }
 
 function getGameCards($) {
-  const gameCards = $(cardCollectionSelector)
-    .find(cardSelector)
-    .toArray();
+  const gameCards = $(cardCollectionSelector).find(cardSelector).toArray();
   const freeGameCards = [];
 
   for (const gameCard of gameCards) {
     // Check for the "FREE NOW" or "COMING SOON" banner underneath the good free games
     // Don't need to include Sludge Life and Thimbleweed Park for the thousandth time
-    if ($(gameCard).find(freeBannerSelector).toArray().length > 0) {
+    if ($(gameCard).find(freeBannerSelectors.join(",")).toArray().length > 0) {
       freeGameCards.push(gameCard);
     }
   }
@@ -52,7 +51,12 @@ function getGameCards($) {
 
 // TODO: Don't pass gameCard and $ into everything
 function getTitle(gameCard, $) {
-  return $(gameCard).find(titleSelector).find("div").text();
+  const text = $(gameCard).find(titleSelector).find("div").text();
+  if (text.startsWith("Unlocking in")) {
+    return "Mystery Game";
+  } else {
+    return text;
+  }
 }
 
 function getDate(gameCard, $, title) {
@@ -110,9 +114,7 @@ function getLink(gameCard, $, urlPrefix) {
 
 function getImageInfo(gameCard, $) {
   return {
-    image: $(gameCard)
-      .find(imageSelector)
-      .attr("src"),
+    image: $(gameCard).find(imageSelector).attr("src"),
   };
 }
 
@@ -140,6 +142,13 @@ function getGameInfo() {
 
     return cardInfos;
   });
+}
+
+async function bypassBotDetection(page) {
+  const userAgent =
+    "Mozilla/5.0 (X11; Linux x86_64)" +
+    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.39 Safari/537.36";
+  await page.setUserAgent(userAgent);
 }
 
 module.exports = {

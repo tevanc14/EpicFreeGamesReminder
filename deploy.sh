@@ -6,7 +6,7 @@ PROJECT_NAME="playground-228817"
 gcloud config set project ${PROJECT_NAME}
 
 gcloud functions deploy ${FUNCTION_NAME} \
-    --runtime nodejs10 \
+    --runtime nodejs12 \
     --trigger-http \
     --source src/ \
     --timeout 60
