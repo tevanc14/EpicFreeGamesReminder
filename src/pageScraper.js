@@ -5,7 +5,7 @@ const reminderProcessor = require("./reminderProcessor");
 
 const url = "https://www.epicgames.com/store/en-US/free-games";
 const cardCollectionSelector = ".css-1myhtyb";
-const cardSelector = ".css-nq799m";
+const cardSelector = ".css-5auk98";
 const titleSelector = ".css-2ucwu";
 const subtitleSelector = ".css-nf3v9d";
 // Needs to be the selector on the img tag itself
